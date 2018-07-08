@@ -2,13 +2,28 @@ import pandas as pd
 import helpers as hlp
 
 def get_clean_data():
-    fileName = '/Users/kim/Projects/turtles-way-down/source/Turtle Data.xls'
+    fileName1 = '/Users/kim/Projects/turtles-way-down/source/Turtle Data.xls'
+    fileName2 = '/Users/kim/Projects/turtles-way-down/source/MF Trapping Data.xlsx'
+    df = clean_data(fileName1,True)
+    df['Capture Location']   = 'Gresham'
+
+    df2 = clean_data(fileName2)
+    df2['Capture Location']   = 'Mason Flats'
+
+    df = df.append(df2,sort=False)
+    
+    return df
+
+def clean_data(fileName,big_file=False):
     #columnNames = ['Name','Address']
 
     print ("Loading data " + fileName)
     df = pd.DataFrame()
-    for year in range(2008,2014):
-        df = df.append(pd.read_excel(fileName,sheet_name=str(year)),sort=False)
+    if (big_file):
+        for year in range(2008,2014):
+            df = df.append(pd.read_excel(fileName,sheet_name=str(year)),sort=False)
+    else:
+        df = pd.read_excel(fileName)
 
 
     #DATA CLEANING
@@ -32,3 +47,4 @@ def get_clean_data():
 
     
     return cleaned
+
