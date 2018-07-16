@@ -20,7 +20,8 @@ def clean_data(fileName,big_file=False):
     print ("Loading data " + fileName)
     df = pd.DataFrame()
     if (big_file):
-        for year in range(2008,2014):
+        for year in range(2008,2014+1):
+            print(year)
             df = df.append(pd.read_excel(fileName,sheet_name=str(year)),sort=False)
     else:
         df = pd.read_excel(fileName)
@@ -38,13 +39,18 @@ def clean_data(fileName,big_file=False):
     cleaned['Plastron'] = pd.to_numeric(cleaned['Plastron'],downcast='float')
     cleaned['Annuli'] = cleaned['Annuli'].apply(hlp.recode_decimal)
     cleaned['Annuli'] = pd.to_numeric(cleaned['Annuli'],downcast='integer')
-    cleaned['Age_per_Weight'] = cleaned['Annuli'] / cleaned['Weight']
 
     # other
     print ("Cleaning other values ...")
     cleaned['Gender'] = cleaned['Gender'].apply(hlp.recode_sex)
     cleaned['Species'] = cleaned['Species'].apply(hlp.recode_species)
 
+    # add features
+    cleaned['Age_To_Weight'] = cleaned['Annuli'] / cleaned['Weight']
+    buckets = 5
+    buckets = int(cleaned['Annuli'].max() / buckets)
+    labels = ["{0} - {1}".format(i, i + buckets) for i in range(0, cleaned['Annuli'].max(), buckets)]
+    cleaned['Annuli_Group'] = pd.cut(cleaned.Annuli, range(0, cleaned.Annuli.max()+buckets, buckets), right=False, labels=labels)
     
     return cleaned
 
