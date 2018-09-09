@@ -3,12 +3,12 @@ import numpy as np
 
 def recode_species(species_value):
     """Takes a string and returns classified species"""
-    if species_value in ['Cpb', 'C.p.b.']:
+    if species_value in ['Cpb','cpb', 'C.p.b.']:
         return 'Cpb'
-    elif species_value in ['Red-eared slider', 'RES']:
+    elif species_value in ['Red-eared slider', 'RES','REs']:
         return 'Res'
     else:
-        return 'unknown'
+        return species_value
 
 def recode_sex(sex_value):
     """Takes a string and returns f, m or unknown"""
@@ -40,3 +40,18 @@ def ecdf(data):
         # y-data for the ECDF: y
         y = np.arange(1, len(x)+1) / len(x)
         return x, y
+    
+def permutation_sample(data1, data2):
+    """Generate a permutation sample from two data sets."""
+    """simulate the hypothesis that two variables have identical probability distributions."""
+    # Concatenate the data sets: data
+    data = np.concatenate((data1,data2))
+
+    # Permute the concatenated array: permuted_data
+    permuted_data = np.random.permutation(data)
+
+    # Split the permuted array into two: perm_sample_1, perm_sample_2
+    perm_sample_1 = permuted_data[:len(data1)]
+    perm_sample_2 = permuted_data[len(data1):]
+
+    return perm_sample_1, perm_sample_2
