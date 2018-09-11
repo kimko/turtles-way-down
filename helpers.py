@@ -10,6 +10,12 @@ def recode_species(species_value):
     else:
         return species_value
 
+def recode_gravid(gravid_value):
+    if str(gravid_value).upper() == "YES":
+        return True
+    else:
+        return False
+
 def recode_sex(sex_value):
     """Takes a string and returns f, m or unknown"""
     if sex_value in ['Male','male?','m','M']:
@@ -38,7 +44,7 @@ def ecdf(data):
         # x-data for the ECDF: x
         x = np.sort(data)
         # y-data for the ECDF: y
-        y = np.arange(1, len(x)+1) / len(x)
+        y = np.arange(1, n+1) / n
         return x, y
     
 def permutation_sample(data1, data2):

@@ -48,7 +48,7 @@ def clean_data(fileName,big_file=False):
     print ("Cleaning other values ...")
     cleaned['Gender'] = cleaned['Gender'].apply(hlp.recode_sex)
     cleaned['Species'] = cleaned['Species'].apply(hlp.recode_species)
-
+    cleaned['Gravid'] = cleaned['Gravid'].apply(hlp.recode_gravid)
     # add features
     cleaned['Age_To_Weight'] = cleaned['Annuli'] / cleaned['Weight']
     buckets = 5
@@ -71,6 +71,10 @@ def clean_data(fileName,big_file=False):
     cleaned['first_date_year'] = cleaned.first_date.map(lambda x: x.year)
     cleaned['new_annuli'] = cleaned.date_year - cleaned.first_date_year + cleaned.lowest_annuli
     cleaned.new_annuli = np.nan_to_num(cleaned.new_annuli)
+
+    # distinguish pregnant females
+    cleaned['gender_plus'] = cleaned['Gender']
+    cleaned.loc[cleaned.Gravid == True,'gender_plus'] = 'f_gra'
     return cleaned
 
 #natives[['ID','Date','Recapture','recapture_count','Annuli','date_year','first_date_year','lowest_annuli','new_annuli','Gender','Weight','Carapace','Plastron','Source']].set_index('ID').to_clipboard()
