@@ -72,9 +72,14 @@ def clean_data(fileName,big_file=False):
     cleaned['new_annuli'] = cleaned.date_year - cleaned.first_date_year + cleaned.lowest_annuli
     cleaned.new_annuli = np.nan_to_num(cleaned.new_annuli)
 
-    # distinguish pregnant females
+    # distinguish Spring, Fall and pregnant females (don't care about juvenilles/unknown)
     cleaned['gender_plus'] = cleaned['Gender']
+    #cleaned.loc[cleaned.gender_plus != 'unknown','gender_plus'] = cleaned.Gender + '_' + cleaned.Date.apply(hlp.recode_season)
     cleaned.loc[cleaned.Gravid == True,'gender_plus'] = 'f_gra'
+
+    cleaned['gender_seasons'] = cleaned['Gender']
+    cleaned.loc[cleaned.gender_seasons != 'unknown','gender_seasons'] = cleaned.Gender + '_' + cleaned.Date.apply(hlp.recode_season)
+    cleaned.loc[cleaned.Gravid == True,'gender_seasons'] = 'f_gra'
     return cleaned
 
 #natives[['ID','Date','Recapture','recapture_count','Annuli','date_year','first_date_year','lowest_annuli','new_annuli','Gender','Weight','Carapace','Plastron','Source']].set_index('ID').to_clipboard()

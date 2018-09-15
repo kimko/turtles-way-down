@@ -25,6 +25,12 @@ def recode_sex(sex_value):
     else:
         return 'unknown'
 
+def recode_season(date):
+    if date.month <= 6:
+        return 'spr'
+    else:
+        return 'fal'
+
 def recode_decimal(dirty_decimal=''):
     """Takes a string and returns a decimal"""
     _ = []
