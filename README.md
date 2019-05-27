@@ -416,7 +416,7 @@ _ = plt.ylabel('Weight')
 
 
 
-![png](output_8_1.png)
+![png](./readme/output_8_1.png)
 
 
 
@@ -431,7 +431,7 @@ _ = plt.show()
 ```
 
 
-![png](output_9_0.png)
+![png](./readme/output_9_0.png)
 
 
 # ECDF Graph of size/weight distribution by sex
@@ -490,7 +490,7 @@ _ = plt.ylabel('ECDF')
 
 
 
-![png](output_11_1.png)
+![png](./readme/output_11_1.png)
 
 
 # Weight, Carapace and Plastron distibution by sex
@@ -508,7 +508,7 @@ _ = plt.show()
 ```
 
 
-![png](output_13_0.png)
+![png](./readme/output_13_0.png)
 
 
 ## Outliers
@@ -652,7 +652,7 @@ _ = plt.tight_layout(rect=[0, 0.03, 1, 0.95])
 
 
 
-![png](output_17_1.png)
+![png](./readme/output_17_1.png)
 
 
 # Males size/weight vs age
@@ -699,7 +699,7 @@ _ = plt.tight_layout(rect=[0, 0.03, 1, 0.95])
 
 
 
-![png](output_19_1.png)
+![png](./readme/output_19_1.png)
 
 
 ### Scatterplots to show metrics per survey location + linear regression
@@ -751,7 +751,7 @@ plt.show()
 ```
 
 
-![png](output_22_0.png)
+![png](./readme/output_22_0.png)
 
 
 # Correlations between annuli, size and weight.
@@ -770,7 +770,7 @@ _ = plt.show()
 ```
 
 
-![png](output_24_0.png)
+![png](./readme/output_24_0.png)
 
 
 # Distribution of weights and sizes by sex, separating out gravid and non-gravid females
@@ -819,7 +819,7 @@ _ = plt.show()
 ```
 
 
-![png](output_26_0.png)
+![png](./readme/output_26_0.png)
 
 
 # Scatterplot graph showing correlation of annuli with size/weights of animals by sex with gravid females separated out from non-gravid females.
@@ -969,15 +969,15 @@ _ = plt.ylabel('Weight')
 
 
 
-![png](output_29_2.png)
+![png](./readme/output_29_2.png)
 
 
 
-![png](output_29_3.png)
+![png](./readme/output_29_3.png)
 
 
 
-![png](output_29_4.png)
+![png](./readme/output_29_4.png)
 
 
 # Scatterplot showing distribution of sizes and weights as a function of which season the female data was collected.
@@ -994,7 +994,7 @@ _ = plt.show()
 ```
 
 
-![png](output_31_0.png)
+![png](./readme/output_31_0.png)
 
 
 # Comparison of size/weight distributions across seasons between Gresham and Mason Flats populations
@@ -1042,15 +1042,15 @@ _ = plt.ylabel('Weight')
 
 
 
-![png](output_33_1.png)
+![png](./readme/output_33_1.png)
 
 
 
-![png](output_33_2.png)
+![png](./readme/output_33_2.png)
 
 
 
-![png](output_33_3.png)
+![png](./readme/output_33_3.png)
 
 
 # Comparison of size/weight distributions across seasons between Gresham and Mason Flats populations
@@ -1079,13 +1079,13 @@ plt.show()
 ```
 
 
-![png](output_35_0.png)
+![png](./readme/output_35_0.png)
 
 
 
-![png](output_35_1.png)
+![png](./readme/output_35_1.png)
 
 
 
-![png](output_35_2.png)
+![png](./readme/output_35_2.png)
 
