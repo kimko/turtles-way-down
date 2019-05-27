@@ -101,3 +101,10 @@ def clean_data(fileName, big_file=False):
     # cleaned.loc[cleaned.gender_seasons != 'unknown', 'gender_seasons'] = cleaned.Gender + '_' + cleaned.Date.apply(hlp.recode_season)
     cleaned.loc[cleaned.Gravid, 'gender_seasons'] = 'f_gra'
     return cleaned
+
+
+if __name__ == "__main__":
+    print("Loading, cleaning and transforming data...")
+    df = get_clean_data()
+    df.to_csv("turtles.csv")
+    print("Exported to turtles.csv")
