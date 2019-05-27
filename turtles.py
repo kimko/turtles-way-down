@@ -6,7 +6,7 @@ import helpers as hlp
 
 def get_clean_data():
     fileName1 = 'source/Turtle Data.xls'
-    fileName2 = 'source/MF Trapping Data.xls'
+    fileName2 = 'source/MF Trapping Data.xlsx'
     df = clean_data(fileName1, True)
     df['Capture Location'] = 'Gresham'
 
@@ -47,8 +47,9 @@ def get_clean_data():
     return cleaned
 
 
-def clean_data(fileName, big_file=False):
-    # columnNames = ['Name','Address']
+def load_data(fileName, big_file=False):
+    ''' Loads data from exel into spreadsheet.
+    "big_file" indicates one tab per year in excel file '''
 
     print("Loading data " + fileName)
     df = pd.DataFrame()
@@ -60,6 +61,11 @@ def clean_data(fileName, big_file=False):
             df = df.append(new, sort=False)
     else:
         df = pd.read_excel(fileName)
+    return df
+
+
+def clean_data(fileName, big_file=False):
+    df = load_data(fileName, big_file)
 
     # DATA CLEANING
     cleaned = df.copy()
