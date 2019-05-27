@@ -19,8 +19,10 @@ def get_clean_data():
     cleaned['Age_To_Weight'] = cleaned['Annuli'] / cleaned['Weight']
     buckets = 5
     buckets = int(cleaned['Annuli'].max() / buckets)
-    labels = ["{0} - {1}".format(i, i + buckets) for i in range(0, cleaned['Annuli'].max(), buckets)]
-    cleaned['Annuli_Group'] = pd.cut(cleaned.Annuli, range(0, cleaned.Annuli.max() + buckets, buckets), right=False, labels=labels)
+    labels = ["{0} - {1}".format(i, i + buckets)
+              for i in range(0, cleaned['Annuli'].max(), buckets)]
+    cleaned['Annuli_Group'] = pd.cut(cleaned.Annuli, range(
+        0, cleaned.Annuli.max() + buckets, buckets), right=False, labels=labels)
     # Calcuate Number of recaptures
     df = cleaned[['ID', 'Date']].groupby('ID').count()
     df.columns = ['recapture_count']
@@ -39,7 +41,8 @@ def get_clean_data():
     cleaned = pd.merge(cleaned, df, how='outer', on='ID')
     cleaned['date_year'] = cleaned.Date.map(lambda x: x.year)
     cleaned['first_date_year'] = cleaned.first_date.map(lambda x: x.year)
-    cleaned['new_annuli'] = cleaned.date_year - cleaned.first_date_year + cleaned.lowest_annuli
+    cleaned['new_annuli'] = cleaned.date_year - \
+        cleaned.first_date_year + cleaned.lowest_annuli
     cleaned.new_annuli = np.nan_to_num(cleaned.new_annuli)
     return cleaned
 
@@ -53,7 +56,7 @@ def clean_data(fileName, big_file=False):
         for year in range(2008, 2014 + 1):
             print(year)
             new = pd.read_excel(fileName, sheet_name=str(year))
-            new['Source'] = '{}|{}'.format('Turtle Data.xls',str(year))
+            new['Source'] = '{}|{}'.format('Turtle Data.xls', str(year))
             df = df.append(new, sort=False)
     else:
         df = pd.read_excel(fileName)
