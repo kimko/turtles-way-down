@@ -3,42 +3,32 @@ import numpy as np
 
 import helpers as hlp
 
+FILE_NAME = "All Site Data oct 2021.xlsx"
+SITES = [
+    "RamseyLB2021",
+    "SB 2021",
+    "Gresham",
+    "MasonFLO",
+    "Whitaker",
+    "ElaineSB1999-2001",
+]
+
 
 def get_clean_data():
-    fileName1 = "Turtle Data.xls"
-    df1 = load_data("source/" + fileName1, True)
-    df1["Capture Location"] = "Gresham"
-
-    fileName2 = "MF Trapping Data.xlsx"
-    df2 = load_data("source/" + fileName2)
-    df2["Capture Location"] = "Mason Flats"
-
-    fileName3 = "Whitaker Trapping Data.xlsx"
-    df3 = load_data("source/" + fileName3)
-    df3["Capture Location"] = "Whitaker Ponds"
-
-    print("Concat Loaded data...")
-    df = pd.concat([df1, df2, df3], sort=False)
+    df = load_data("source/" + FILE_NAME)
     df = clean_data(df)
     df = new_features(df)
     return df
 
 
-def load_data(fileName, big_file=False):
-    """Loads data from exel into spreadsheet.
-    "big_file" indicates one tab per year in excel file"""
-
+def load_data(fileName):
     print("Loading data " + fileName)
     df = pd.DataFrame()
-    if big_file:
-        for year in range(2008, 2014 + 1):
-            print(year)
-            new = pd.read_excel(fileName, sheet_name=str(year))
-            new["Source"] = "{}|{}".format("Turtle Data.xls", str(year))
-            df = df.append(new, sort=False)
-    else:
-        df = pd.read_excel(fileName)
-        df["Source"] = fileName
+    for site in SITES:
+        print(site)
+        new = pd.read_excel(fileName, sheet_name=site)
+        new["Source"] = "{}|{}".format(FILE_NAME, site)
+        df = df.append(new, sort=False)
     return df
 
 
@@ -48,7 +38,6 @@ def clean_data(df):
         Weight: cleaned data
         Weight_orig: original data
     """
-
     # decimals
     print("Cleaning decimals ...")
     df["Weight_orig"] = df.Weight
@@ -72,6 +61,8 @@ def clean_data(df):
     df["Species"] = df["Species"].apply(hlp.recode_species)
     df["Gravid_orig"] = df.Gravid
     df["Gravid"] = df["Gravid"].apply(hlp.recode_gravid)
+    df["Date_orig"] = df.Date
+    df["Date"] = pd.to_datetime(df.Date_orig)
     return df
 
 
